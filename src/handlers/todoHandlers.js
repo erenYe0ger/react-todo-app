@@ -25,6 +25,13 @@ export const deleteTodo = (id, todos, setTodos) => {
   setTodos(newTodos);
 };
 
+export const updateTodo = (id, todos, setTodos, editedText) => {
+  const newTodos = todos.map((item) => {
+    return item.id === id ? { ...item, text: editedText } : item;
+  });
+  setTodos(newTodos);
+};
+
 export const clearCompleted = (todos, setTodos) => {
   const newTodos = todos.filter((item) => !item.completed);
   setTodos(newTodos);

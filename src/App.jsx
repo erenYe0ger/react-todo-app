@@ -7,6 +7,7 @@ import {
   toggleTodo,
   deleteTodo,
   clearCompleted,
+  updateTodo,
 } from "./handlers/todoHandlers.js";
 
 function App() {
@@ -36,6 +37,10 @@ function App() {
 
   const handleDelete = (id) => {
     deleteTodo(id, todos, setTodos);
+  };
+
+  const handleUpdate = (id, editedText) => {
+    updateTodo(id, todos, setTodos, editedText);
   };
 
   const handleClearCompleted = () => {
@@ -90,6 +95,7 @@ function App() {
         todos={filteredTodos}
         handleDelete={handleDelete}
         handleToggle={handleToggle}
+        handleUpdate={handleUpdate}
       />
     </div>
   );

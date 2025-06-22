@@ -1,6 +1,6 @@
 import TodoItem from "./TodoItem";
 
-function TodoList({ todos, handleDelete, handleToggle }) {
+function TodoList({ todos, handleDelete, handleToggle, handleUpdate }) {
   return (
     <ul
       style={{
@@ -15,6 +15,7 @@ function TodoList({ todos, handleDelete, handleToggle }) {
             item={item}
             handleDelete={handleDelete}
             handleToggle={handleToggle}
+            handleUpdate={handleUpdate}
           />
         );
       })}

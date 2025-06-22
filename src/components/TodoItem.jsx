@@ -1,4 +1,9 @@
-function TodoItem({ item, handleDelete, handleToggle }) {
+import { useState } from "react";
+
+function TodoItem({ item, handleDelete, handleToggle, handleUpdate }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedText, setEditedText] = useState(item.text);
+
   return (
     <li
       style={{
@@ -6,21 +11,59 @@ function TodoItem({ item, handleDelete, handleToggle }) {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        background: "#f5f5f5",
+        background: "#d9f9f9",
         padding: "0.5rem",
         borderRadius: "5px",
       }}
     >
-      <span
+      {isEditing ? (
+        <input
+          style={{
+            flex: "1",
+            background: "#ddd",
+            borderRadius: "5px",
+            fontSize: "1rem",
+            padding: "0.4rem",
+            border: "none",
+            outline: "none",
+          }}
+          value={editedText}
+          onChange={(e) => {
+            setEditedText(e.target.value);
+          }}
+        />
+      ) : (
+        <span
+          style={{
+            textDecoration: item.completed ? "line-through" : "none",
+            cursor: "pointer",
+            flex: "1",
+            fontFamily: "sans-serif",
+          }}
+          onClick={() => handleToggle(item.id)}
+        >
+          {item.text}
+        </span>
+      )}
+
+      <button
         style={{
-          textDecoration: item.completed ? "line-through" : "none",
+          marginLeft: "1rem",
+          background: "white",
+          border: "none",
+          padding: "0.3rem 0.6rem",
           cursor: "pointer",
-          flex: "1",
+          borderRadius: "4px",
         }}
-        onClick={() => handleToggle(item.id)}
+        onClick={() => {
+          if (isEditing) {
+            handleUpdate(item.id, editedText);
+          }
+          setIsEditing(!isEditing);
+        }}
       >
-        {item.text}
-      </span>
+        {isEditing ? "✅" : "✏️"}
+      </button>
 
       <button
         style={{
