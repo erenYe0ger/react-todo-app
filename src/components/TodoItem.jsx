@@ -20,6 +20,7 @@ function TodoItem({ item, handleDelete, handleToggle, handleUpdate }) {
         <input
           style={{
             flex: "1",
+            minWidth: "0",
             background: "#ddd",
             borderRadius: "5px",
             fontSize: "1rem",
